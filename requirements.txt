@@ -1,2 +1,4 @@
 Flask==3.0.3
+UnleashClient
 Werkzeug==3.0.3
+mysql-connector-python

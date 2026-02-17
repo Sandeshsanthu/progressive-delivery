@@ -5,18 +5,23 @@ ENV PYTHONDONTWRITEBYTECODE=1 \
 
 WORKDIR /app
 
+RUN apt-get update && apt-get install -y --no-install-recommends \
+    ca-certificates \
+  && rm -rf /var/lib/apt/lists/*
+
 # Install deps first (better caching)
-COPY requirements.txt .
-RUN pip install --no-cache-dir -r requirements.txt \
+COPY requirements.txt /app/requirements.txt
+RUN pip install --no-cache-dir -r /app/requirements.txt \
  && pip install --no-cache-dir gunicorn
 
 # Copy app code
 COPY . .
 
 # Ensure DB folder writable (SQLite file will be created here)
-RUN mkdir -p /app/data
-ENV DB_PATH=/app/data/car_market.db
-
+RUN apt-get update && apt-get install -y --no-install-recommends \
+    ca-certificates \
+  && rm -rf /var/lib/apt/lists/*
+COPY . /app
 EXPOSE 8000
 
 # Run behind gunicorn; binds to 0.0.0.0 so it's reachable

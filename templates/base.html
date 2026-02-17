@@ -59,6 +59,9 @@
       {% endfor %}
     {% endif %}
   {% endwith %}
+  {% if CART_ENABLED %}
+  <a class="btn" href="{{ url_for('view_cart') }}">Cart</a>
+{% endif %}
 
   {% block content %}{% endblock %}
 </div>

@@ -45,6 +45,9 @@
           <div style="font-size:18px; font-weight:bold;">{{ l["price_cents"] | money }}</div>
           <div class="badge active">ACTIVE</div>
         </div>
+{% if l["status"] == "SOLD" %}
+  <strong>(SOLD)</strong>
+{% endif %}
       </div>
     </div>
   {% else %}
